@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalkToText Pro - Transform Meetings into Actionable Insights</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
+    <style>
+        :root {
+          /* Glassmorphism and Futuristic Design Tokens from your CSS */
+          --background: #0a0a0f;
+          --foreground: #ffffff;
+          --card: rgba(255, 255, 255, 0.05);
+          --card-foreground: #ffffff;
+          --popover: rgba(255, 255, 255, 0.1);
+          --popover-foreground: #ffffff;
+          --primary: #6366f1;
+          --primary-foreground: #ffffff;
+          --secondary: rgba(99, 102, 241, 0.2);
+          --secondary-foreground: #ffffff;
+          --muted: rgba(255, 255, 255, 0.1);
+          --muted-foreground: rgba(255, 255, 255, 0.7);
+          --accent: #10b981;
+          --accent-foreground: #ffffff;
+          --destructive: #ef4444;
+          --destructive-foreground: #ffffff;
+          --border: rgba(255, 255, 255, 0.1);
+          --input: rgba(255, 255, 255, 0.05);
+          --ring: rgba(99, 102, 241, 0.5);
+          --radius: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-color: var(--border);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            background: radial-gradient(ellipse at top left, rgba(56, 189, 248, 0.12) 0%, transparent 50%),
+                        radial-gradient(ellipse at top right, rgba(168, 85, 247, 0.12) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
+                        #111827;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Glass effects from your CSS */
+        .glass {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .glass-card-light {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .glass-button {
+            background: rgba(99, 102, 241, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .glass-button:hover {
+            background: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Fixed gradient text from your CSS */
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #10b981 50%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #6366f1; /* Fallback */
+        }
+
+        /* Navigation dark background */
+        .nav-dark {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            color: #ffffff;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #6366f1;
+            text-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
+        }
+
+        /* 3D Effects from your CSS */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .glow {
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+
+        .glow-green {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+        }
+
+        .smooth-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scale-hover:hover {
+            transform: scale(1.05);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0.75rem 0;
+        }
+
+        .navbar-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--foreground);
+            text-decoration: none;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            background: var(--muted);
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification-bell {
+            position: relative;
+            padding: 0.5rem;
+            border-radius: 8px;
+            background: var(--muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .notification-bell:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 8px;
+            height: 8px;
+            background: var(--destructive);
+            border-radius: 50%;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 10rem;
+            padding-bottom: 6rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--muted-foreground);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--primary-foreground);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: rgba(99, 102, 241, 0.9);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--secondary-foreground);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(99, 102, 241, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 4rem 2rem;
+        }
+
+        .features-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--foreground);
+        }
+
+        .features-section p {
+            text-align: center;
+            color: var(--muted-foreground);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            text-align: left;
+            border-radius: var(--radius);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon.mic { background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%); }
+        .feature-icon.zap { background: linear-gradient(135deg, var(--accent) 0%, #22c55e 100%); }
+        .feature-icon.globe { background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); }
+        .feature-icon.shield { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--foreground);
+        }
+
+        .feature-card p {
+            color: var(--muted-foreground);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+            text-align: left;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 4rem 2rem;
+        }
+
+        .how-it-works h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--foreground);
+        }
+
+        .how-it-works > p {
+            text-align: center;
+            color: var(--muted-foreground);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .step-number.step-1 { background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%); }
+        .step-number.step-2 { background: linear-gradient(135deg, var(--accent) 0%, #22c55e 100%); }
+        .step-number.step-3 { background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); }
+
+        .step h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--foreground);
+        }
+
+        .step p {
+            color: var(--muted-foreground);
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 4rem 2rem;
+        }
+
+        .cta-card {
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        .cta-card h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--foreground);
+        }
+
+        .cta-card p {
+            color: var(--muted-foreground);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: var(--foreground);
+        }
+
+        .footer-section p {
+            color: var(--muted-foreground);
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--muted-foreground);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--foreground);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .chat-bubble {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .features-section,
+            .how-it-works,
+            .cta-section {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar nav-dark">
+        <div class="navbar-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">T</div>
+                <span><strong>TalkToText</strong> Pro</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link"><i data-lucide="home" style="width: 16px; height: 16px;"></i> Home</a></li>
+                <li><a href="#" class="nav-link"><i data-lucide="info" style="width: 16px; height: 16px;"></i> About</a></li>
+                <li><a href="#" class="nav-link"><i data-lucide="mail" style="width: 16px; height: 16px;"></i> Contact</a></li>
+                <li><a href="#" class="nav-link"><i data-lucide="layout-dashboard" style="width: 16px; height: 16px;"></i> Dashboard</a></li>
+                <li><a href="#" class="nav-link"><i data-lucide="upload" style="width: 16px; height: 16px;"></i> Upload</a></li>
+                <li><a href="#" class="nav-link"><i data-lucide="history" style="width: 16px; height: 16px;"></i> History</a></li>
+            </ul>
+            <div class="user-section">
+                <div class="notification-bell">
+                    <i data-lucide="bell" style="width: 16px; height: 16px;"></i>
+                    <div class="notification-dot"></div>
+                </div>
+                <div class="user-avatar">Z</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="floating">
+                <h1>
+                    <span class="gradient-text">Transform Meetings into</span><br>
+                    <span class="gradient-text">Actionable Insights</span>
+                </h1>
+            </div>
+            <p>
+                AI-powered transcription and intelligent note generation that turns your meeting recordings into structured, actionable documentation in minutes.
+            </p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary glass-button">
+                    <i data-lucide="play" style="width: 20px; height: 20px; margin-right: 8px;"></i>
+                    Start Upload
+                </a>
+                <a href="#" class="btn btn-secondary glass-button">
+                    Learn More
+                    <i data-lucide="arrow-right" style="width: 16px; height: 16px; margin-left: 8px;"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2>Powered by Advanced AI</h2>
+            <p>Experience the future of meeting documentation with cutting-edge AI technology</p>
+            
+            <div class="features-grid">
+                <div class="feature-card glass-card smooth-transition scale-hover">
+                    <div class="feature-icon mic glow">
+                        <i data-lucide="mic" style="width: 24px; height: 24px; color: white;"></i>
+                    </div>
+                    <h3>AI Transcription</h3>
+                    <p>Advanced speech-to-text with 95%+ accuracy across multiple languages</p>
+                </div>
+                
+                <div class="feature-card glass-card smooth-transition scale-hover">
+                    <div class="feature-icon zap glow-green">
+                        <i data-lucide="zap" style="width: 24px; height: 24px; color: white;"></i>
+                    </div>
+                    <h3>Smart Summarization</h3>
+                    <p>Intelligent extraction of key points, decisions, and action items</p>
+                </div>
+                
+                <div class="feature-card glass-card smooth-transition scale-hover">
+                    <div class="feature-icon globe glow">
+                        <i data-lucide="globe" style="width: 24px; height: 24px; color: white;"></i>
+                    </div>
+                    <h3>Multi-Language</h3>
+                    <p>Automatic translation and processing of 50+ languages</p>
+                </div>
+                
+                <div class="feature-card glass-card smooth-transition scale-hover">
+                    <div class="feature-icon shield glow-green">
+                        <i data-lucide="shield" style="width: 24px; height: 24px; color: white;"></i>
+                    </div>
+                    <h3>Secure & Private</h3>
+                    <p>Enterprise-grade security with encrypted data storage</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2>How It Works</h2>
+            <p>Simple, fast, and intelligent meeting processing in just a few steps</p>
+            
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number step-1 glow">1</div>
+                    <h3>Upload Recording</h3>
+                    <p>Upload your meeting audio or video files from any platform</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number step-2 glow-green">2</div>
+                    <h3>AI Processing</h3>
+                    <p>Our AI transcribes, translates, and analyzes your meeting content</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number step-3 glow">3</div>
+                    <h3>Get Results</h3>
+                    <p>Receive structured notes with summaries, action items, and insights</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-card glass-card-light">
+            <h2>Ready to Transform Your Meetings?</h2>
+            <p>Join thousands of professionals who trust TalkToText Pro for their meeting documentation</p>
+            <a href="#" class="btn btn-primary glass-button glow">Contact Sale</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer glass-card">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo" style="margin-bottom: 1rem;">
+                    <div class="logo-icon">T</div>
+                    <span><strong>TalkToText</strong> Pro</span>
+                </div>
+                <p>Transform your meetings into actionable insights with AI-powered transcription and intelligent note generation.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>mudasirhanif6438@gmail.com</p>
+                <p>📞 +92 3042276844</p>
+                <p>📍 Apiach Metro Star Gate</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            © 2025 TalkToText Pro. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Chat Bubble -->
+    <div class="chat-bubble">
+        <span style="font-size: 14px;">D</span>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.8)';
+            } else {
+                navbar.style.background = 'rgba(0, 0, 0, 0.6)';
+            }
+        });
+
+        // Chat bubble click handler
+        document.querySelector('.chat-bubble').addEventListener('click', () => {
+            alert('Chat functionality would open here!');
+        });
+    </script>
+</body>
+</html>
