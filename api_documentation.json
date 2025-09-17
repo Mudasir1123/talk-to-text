@@ -1,0 +1,159 @@
+{
+  "title": "TalkToText Pro API Documentation",
+  "version": "1.0.0",
+  "baseUrl": "http://localhost:5000/api",
+  "endpoints": {
+    "authentication": {
+      "register": {
+        "method": "POST",
+        "url": "/auth/register",
+        "description": "Register a new user account",
+        "body": {
+          "email": "string (required)",
+          "password": "string (required)",
+          "full_name": "string (optional)"
+        },
+        "response": {
+          "message": "string",
+          "access_token": "string",
+          "user": "object"
+        }
+      },
+      "login": {
+        "method": "POST",
+        "url": "/auth/login",
+        "description": "Login with existing credentials",
+        "body": {
+          "email": "string (required)",
+          "password": "string (required)"
+        },
+        "response": {
+          "message": "string",
+          "access_token": "string",
+          "user": "object"
+        }
+      },
+      "profile": {
+        "method": "GET",
+        "url": "/auth/profile",
+        "description": "Get current user profile",
+        "headers": {
+          "Authorization": "Bearer <access_token>"
+        },
+        "response": {
+          "user": "object"
+        }
+      }
+    },
+    "file_upload": {
+      "upload": {
+        "method": "POST",
+        "url": "/upload",
+        "description": "Upload meeting recording file",
+        "headers": {
+          "Authorization": "Bearer <access_token>",
+          "Content-Type": "multipart/form-data"
+        },
+        "body": {
+          "file": "file (required)",
+          "title": "string (optional)",
+          "language": "string (optional, default: 'en')"
+        },
+        "response": {
+          "message": "string",
+          "recording_id": "integer",
+          "filename": "string",
+          "file_size": "integer"
+        }
+      }
+    },
+    "processing": {
+      "start_processing": {
+        "method": "POST",
+        "url": "/process/<recording_id>",
+        "description": "Start AI processing of uploaded recording",
+        "headers": {
+          "Authorization": "Bearer <access_token>"
+        },
+        "response": {
+          "message": "string",
+          "recording_id": "integer"
+        }
+      },
+      "get_status": {
+        "method": "GET",
+        "url": "/processing-status/<recording_id>",
+        "description": "Get processing status and logs",
+        "headers": {
+          "Authorization": "Bearer <access_token>"
+        },
+        "response": {
+          "recording_id": "integer",
+          "status": "string",
+          "processing_steps": "array"
+        }
+      }
+    },
+    "meetings": {
+      "list_meetings": {
+        "method": "GET",
+        "url": "/meetings",
+        "description": "Get user's meeting history",
+        "headers": {
+          "Authorization": "Bearer <access_token>"
+        },
+        "query_params": {
+          "limit": "integer (optional, default: 50)"
+        },
+        "response": {
+          "meetings": "array"
+        }
+      },
+      "get_meeting": {
+        "method": "GET",
+        "url": "/meetings/<meeting_id>",
+        "description": "Get detailed meeting information",
+        "headers": {
+          "Authorization": "Bearer <access_token>"
+        },
+        "response": {
+          "meeting": "object"
+        }
+      },
+      "download_notes": {
+        "method": "GET",
+        "url": "/meetings/<meeting_id>/download",
+        "description": "Download meeting notes as PDF",
+        "headers": {
+          "Authorization": "Bearer <access_token>"
+        },
+        "response": "PDF file or JSON with download info"
+      }
+    },
+    "health": {
+      "health_check": {
+        "method": "GET",
+        "url": "/health",
+        "description": "Check API health status",
+        "response": {
+          "status": "string",
+          "timestamp": "string",
+          "version": "string"
+        }
+      }
+    }
+  },
+  "error_codes": {
+    "400": "Bad Request - Invalid input data",
+    "401": "Unauthorized - Invalid or missing authentication",
+    "404": "Not Found - Resource not found",
+    "409": "Conflict - Resource already exists",
+    "413": "Payload Too Large - File size exceeds limit",
+    "500": "Internal Server Error - Server error occurred"
+  },
+  "authentication": {
+    "type": "JWT Bearer Token",
+    "header": "Authorization: Bearer <access_token>",
+    "note": "Include the access token received from login/register in the Authorization header"
+  }
+}
