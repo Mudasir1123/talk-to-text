@@ -17,7 +17,6 @@ import {
   Upload,
   History,
   ChevronDown,
-  Settings,
   Bell
 } from "lucide-react"
 import { authService, type User as UserType } from "../lib/auth"
@@ -169,10 +168,6 @@ export default function Navbar() {
                       </div>
                       
                       <div className="py-1">
-                        <button className="w-full text-left px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors duration-200 flex items-center space-x-2">
-                          <Settings className="w-4 h-4" />
-                          <span>Settings</span>
-                        </button>
                         <button 
                           onClick={handleLogout}
                           className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-red-500/10 transition-colors duration-200 flex items-center space-x-2"
@@ -300,8 +295,6 @@ export default function Navbar() {
                     size="sm"
                     className="w-full glass-button text-white hover:bg-white/10 justify-start transition-all duration-300 hover:translate-x-2"
                   >
-                    <Settings className="w-4 h-4 mr-2" />
-                    Settings
                   </Button>
                   
                   <Button

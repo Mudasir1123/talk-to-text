@@ -160,13 +160,6 @@ export default function LoginPage() {
                   </Link>
                 </p>
               </div>
-
-              <div className="mt-6 p-4 glass rounded-lg">
-                <p className="text-sm text-muted-foreground mb-2">Demo Credentials:</p>
-                <p className="text-xs text-muted-foreground">
-                  <strong>Admin:</strong> admin@gmail.com / admin123
-                </p>
-              </div>
             </CardContent>
           </Card>
         </div>

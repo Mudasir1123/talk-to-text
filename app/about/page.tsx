@@ -143,97 +143,91 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Team</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              The talented individuals driving TalkToText Pro forward
-            </p>
+<section className="py-20 px-4 sm:px-6 lg:px-8">
+  <div className="max-w-7xl mx-auto">
+    <div className="text-center mb-16">
+      <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Team</h2>
+      <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+        The talented individuals driving TalkToText Pro forward
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Muhammad Mudasir - Backend Developer */}
+      <Card className="glass-card smooth-transition scale-hover flex flex-col items-center">
+        <CardContent className="p-6 text-center flex flex-col items-center w-full">
+          <div className="relative mb-4">
+            <div className="w-20 h-20 bg-gradient-to-r from-accent to-primary rounded-full flex items-center justify-center glow text-white font-bold text-xl">
+              M
+            </div>
+            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center glow-green">
+              <User className="w-3 h-3 text-white" />
+            </div>
           </div>
+          <h3 className="text-lg font-semibold mb-2">Muhammad Mudasir</h3>
+          <p className="text-muted-foreground mb-2">Frontend & Backend Developer</p>
+          <p className="text-sm text-muted-foreground mb-3">
+            Building robust and scalable server-side architecture to power our AI-driven platform.
+          </p>
+          <ul className="text-sm text-muted-foreground list-disc list-inside text-left">
+            <li>API development & integration</li>
+            <li>Authentication & security implementation</li>
+            <li>Database design & optimization</li>
+          </ul>
+        </CardContent>
+      </Card>
 
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Muhammad Mudasir - Backend Developer */}
-            <Card className="glass-card smooth-transition scale-hover flex flex-col items-center">
-              <CardContent className="p-6 text-center flex flex-col items-center w-full">
-                <div className="relative mb-4">
-                  <div className="w-20 h-20 bg-gradient-to-r from-accent to-primary rounded-full flex items-center justify-center glow text-white font-bold text-xl">
-                    M
-                  </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center glow-green">
-                    <User className="w-3 h-3 text-white" />
-                  </div>
-                </div>
-                <h3 className="text-lg font-semibold mb-2">Muhammad Mudasir</h3>
-                <p className="text-muted-foreground mb-2">Frontend & Backend Developer</p>
-                <p className="text-sm text-muted-foreground">
-                  Building robust and scalable server-side architecture to power our AI-driven platform.
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Zaki Haider - Frontend Developer */}
-            <Card className="glass-card smooth-transition scale-hover flex flex-col items-center">
-              <CardContent className="p-6 text-center flex flex-col items-center w-full">
-                <div className="relative mb-4">
-                  <div className="w-20 h-20 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center glow text-white font-bold text-xl">
-                    Z
-                  </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-accent rounded-full flex items-center justify-center glow-green">
-                    <User className="w-3 h-3 text-white" />
-                  </div>
-                </div>
-                <h3 className="text-lg font-semibold mb-2">Zaki Haider</h3>
-                <p className="text-muted-foreground mb-2">Frontend & Backend Developer</p>
-                <p className="text-sm text-muted-foreground">
-                  Crafting intuitive and responsive user interfaces that make meeting analysis seamless.
-                </p>
-              </CardContent>
-            </Card>
-
-
-
-            {/* Hamza Akram - Documentation Specialist */}
-            <Card className="glass-card smooth-transition scale-hover flex flex-col items-center">
-              <CardContent className="p-6 text-center flex flex-col items-center w-full">
-                <div className="relative mb-4">
-                  <div className="w-20 h-20 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center glow text-white font-bold text-xl">
-                    H
-                  </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-accent rounded-full flex items-center justify-center glow-green">
-                    <User className="w-3 h-3 text-white" />
-                  </div>
-                </div>
-                <h3 className="text-lg font-semibold mb-2">Hamza Akram</h3>
-                <p className="text-muted-foreground mb-2">Documentation Specialist</p>
-                <p className="text-sm text-muted-foreground">
-                  Creating comprehensive guides and documentation to empower users with deep platform knowledge.
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Hassan - Presentations Specialist */}
-            <Card className="glass-card smooth-transition scale-hover flex flex-col items-center">
-              <CardContent className="p-6 text-center flex flex-col items-center w-full">
-                <div className="relative mb-4">
-                  <div className="w-20 h-20 bg-gradient-to-r from-accent to-primary rounded-full flex items-center justify-center glow text-white font-bold text-xl">
-                    H
-                  </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center glow-green">
-                    <User className="w-3 h-3 text-white" />
-                  </div>
-                </div>
-                <h3 className="text-lg font-semibold mb-2">Hassan Shah</h3>
-                <p className="text-muted-foreground mb-2">Presentations Specialist</p>
-                <p className="text-sm text-muted-foreground">
-                  Designing compelling presentations and demos that showcase the full potential of our technology.
-                </p>
-              </CardContent>
-            </Card>
+      {/* Zaki Haider - Frontend Developer */}
+      <Card className="glass-card smooth-transition scale-hover flex flex-col items-center">
+        <CardContent className="p-6 text-center flex flex-col items-center w-full">
+          <div className="relative mb-4">
+            <div className="w-20 h-20 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center glow text-white font-bold text-xl">
+              Z
+            </div>
+            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-accent rounded-full flex items-center justify-center glow-green">
+              <User className="w-3 h-3 text-white" />
+            </div>
           </div>
-        </div>
-      </section>
+          <h3 className="text-lg font-semibold mb-2">Zaki Haider</h3>
+          <p className="text-muted-foreground mb-2">Frontend & Backend Developer</p>
+          <p className="text-sm text-muted-foreground mb-3">
+            Crafting intuitive and responsive user interfaces that make meeting analysis seamless.
+          </p>
+          <ul className="text-sm text-muted-foreground list-disc list-inside text-left">
+            <li>UI/UX design & implementation</li>
+            <li>Responsive layouts with Tailwind & React</li>
+            <li>Integration with backend APIs</li>
+          </ul>
+        </CardContent>
+      </Card>
+
+      {/* Hamza Akram - Documentation Specialist */}
+      <Card className="glass-card smooth-transition scale-hover flex flex-col items-center">
+        <CardContent className="p-6 text-center flex flex-col items-center w-full">
+          <div className="relative mb-4">
+            <div className="w-20 h-20 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center glow text-white font-bold text-xl">
+              H
+            </div>
+            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-accent rounded-full flex items-center justify-center glow-green">
+              <User className="w-3 h-3 text-white" />
+            </div>
+          </div>
+          <h3 className="text-lg font-semibold mb-2">Hamza Akram</h3>
+          <p className="text-muted-foreground mb-2">Documentation Specialist</p>
+          <p className="text-sm text-muted-foreground mb-3">
+            Creating comprehensive guides and documentation to empower users with deep platform knowledge.
+          </p>
+          <ul className="text-sm text-muted-foreground list-disc list-inside text-left">
+            <li>User manuals & API docs</li>
+            <li>Project workflow documentation</li>
+            <li>Knowledge-base & tutorials</li>
+          </ul>
+        </CardContent>
+      </Card>
+    </div>
+  </div>
+</section>
+
 
       <Footer />
     </div>

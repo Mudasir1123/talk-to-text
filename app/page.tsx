@@ -8,7 +8,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { toast } from "sonner"; // For error notifications
 
-export default function HomePage() {
+export default function HomePagfette() {
   const [backendStatus, setBackendStatus] = useState<string | null>(null);
 
   useEffect(() => {
