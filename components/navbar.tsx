@@ -84,8 +84,11 @@ export default function Navbar() {
             <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center glow transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
               <Mic className="w-5 h-5 text-white transition-all duration-300 group-hover:animate-pulse" />
             </div>
-            <span className="text-xl font-bold gradient-text transition-all duration-300 group-hover:scale-105">
+            <span className="text-xl font-bold gradient-text transition-all duration-300 group-hover:scale-105 hidden sm:block">
               TalkToText Pro
+            </span>
+            <span className="text-lg font-bold gradient-text transition-all duration-300 group-hover:scale-105 sm:hidden">
+              TTP
             </span>
           </Link>
 
@@ -280,32 +283,47 @@ export default function Navbar() {
             <div className="pt-4 pb-3 border-t border-white/10">
               {isLoggedIn ? (
                 <div className="space-y-3">
-                  <div className="flex items-center px-3 py-2 space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center text-sm font-bold text-white">
-                      {getUserInitials()}
+                  {/* Mobile User Profile Section */}
+                  <div className="relative">
+                    <div 
+                      className="flex items-center px-3 py-2 space-x-3 cursor-pointer transition-all duration-300 hover:bg-white/10 rounded-md"
+                      onClick={() => setShowUserMenu(!showUserMenu)}
+                    >
+                      <div className="w-10 h-10 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center text-sm font-bold text-white">
+                        {getUserInitials()}
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium text-white">{getDisplayName()}</p>
+                        <p className="text-xs text-gray-400 truncate">{user?.email}</p>
+                      </div>
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showUserMenu ? 'rotate-180' : ''}`} />
                     </div>
-                    <div>
-                      <p className="text-sm font-medium text-white">{getDisplayName()}</p>
-                      <p className="text-xs text-gray-400">{user?.email}</p>
-                    </div>
+                    
+                    {/* Mobile User Dropdown */}
+                    {showUserMenu && (
+                      <div className="mt-2 mx-3 glass-card rounded-lg border border-white/10 overflow-hidden animate-in slide-in-from-top-2 duration-200">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="w-full glass-button text-white hover:bg-white/10 justify-start transition-all duration-300 hover:translate-x-2"
+                        >
+                          <Bell className="w-4 h-4 mr-2" />
+                          Notifications
+                          <span className="ml-auto w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+                        </Button>
+                        
+                        <Button
+                          onClick={handleLogout}
+                          variant="ghost"
+                          size="sm"
+                          className="w-full glass-button border-red-500/30 text-red-400 hover:bg-red-500/20 bg-transparent transition-all duration-300 justify-start"
+                        >
+                          <LogOut className="w-4 h-4 mr-2" />
+                          Logout
+                        </Button>
+                      </div>
+                    )}
                   </div>
-                  
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="w-full glass-button text-white hover:bg-white/10 justify-start transition-all duration-300 hover:translate-x-2"
-                  >
-                  </Button>
-                  
-                  <Button
-                    onClick={handleLogout}
-                    variant="outline"
-                    size="sm"
-                    className="w-full glass-button border-red-500/30 text-red-400 hover:bg-red-500/20 bg-transparent transition-all duration-300 hover:scale-105"
-                  >
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Logout
-                  </Button>
                 </div>
               ) : (
                 <div className="space-y-2">

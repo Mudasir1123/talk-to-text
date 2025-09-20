@@ -203,11 +203,11 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen">
         <Navbar />
-        <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto text-center">
             <div className="animate-pulse space-y-4">
-              <div className="h-8 bg-muted rounded w-1/3 mx-auto"></div>
-              <div className="h-4 bg-muted rounded w-1/2 mx-auto"></div>
+              <div className="h-6 sm:h-8 bg-muted rounded w-1/3 mx-auto"></div>
+              <div className="h-3 sm:h-4 bg-muted rounded w-1/2 mx-auto"></div>
             </div>
           </div>
         </div>
@@ -220,18 +220,18 @@ export default function DashboardPage() {
     <div className="min-h-screen">
       <Navbar />
 
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <section className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 sm:mb-12">
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-4 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
                 Welcome back, {user?.full_name || user?.email}
               </h1>
-              <p className="text-xl text-muted-foreground">Here's an overview of your meeting analysis activity</p>
+              <p className="text-lg sm:text-xl text-muted-foreground">Here's an overview of your meeting analysis activity</p>
             </div>
             <Link href="/upload">
-              <Button className="glass-button bg-primary/20 border-primary/30 hover:bg-primary/30 glow mt-4 md:mt-0">
+              <Button className="glass-button bg-primary/20 border-primary/30 hover:bg-primary/30 glow mt-4 md:mt-0 w-full md:w-auto">
                 <Plus className="w-4 h-4 mr-2" />
                 Upload Meeting
               </Button>
@@ -239,58 +239,58 @@ export default function DashboardPage() {
           </div>
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
             <Card className="glass-card smooth-transition scale-hover">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-muted-foreground text-sm">Total Meetings</p>
-                    <p className="text-3xl font-bold">{stats?.total_meetings || 0}</p>
+                    <p className="text-muted-foreground text-xs sm:text-sm">Total Meetings</p>
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold">{stats?.total_meetings || 0}</p>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center glow">
-                    <FileText className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center glow">
+                    <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="glass-card smooth-transition scale-hover">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-muted-foreground text-sm">Completed</p>
-                    <p className="text-3xl font-bold">{stats?.completed_meetings || 0}</p>
+                    <p className="text-muted-foreground text-xs sm:text-sm">Completed</p>
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold">{stats?.completed_meetings || 0}</p>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-r from-accent to-primary rounded-lg flex items-center justify-center glow-green">
-                    <CheckCircle className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-accent to-primary rounded-lg flex items-center justify-center glow-green">
+                    <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="glass-card smooth-transition scale-hover">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-muted-foreground text-sm">This Week</p>
-                    <p className="text-3xl font-bold">{stats?.this_week_meetings || 0}</p>
+                    <p className="text-muted-foreground text-xs sm:text-sm">This Week</p>
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold">{stats?.this_week_meetings || 0}</p>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center glow">
-                    <TrendingUp className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center glow">
+                    <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="glass-card smooth-transition scale-hover">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-muted-foreground text-sm">Processing</p>
-                    <p className="text-3xl font-bold">{stats?.processing_meetings || 0}</p>
+                    <p className="text-muted-foreground text-xs sm:text-sm">Processing</p>
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold">{stats?.processing_meetings || 0}</p>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-r from-accent to-primary rounded-lg flex items-center justify-center glow-green">
-                    <Activity className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-accent to-primary rounded-lg flex items-center justify-center glow-green">
+                    <Activity className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
@@ -298,21 +298,21 @@ export default function DashboardPage() {
           </div>
 
           {/* Charts Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
             {/* Weekly Activity Chart */}
             <Card className="glass-card">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <Calendar className="w-5 h-5" />
-                  <span>Weekly Activity</span>
+                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-sm sm:text-base">Weekly Activity</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
+                <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
                   <BarChart data={weeklyData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                    <XAxis dataKey="day" stroke="rgba(255,255,255,0.6)" />
-                    <YAxis stroke="rgba(255,255,255,0.6)" />
+                    <XAxis dataKey="day" stroke="rgba(255,255,255,0.6)" fontSize={12} />
+                    <YAxis stroke="rgba(255,255,255,0.6)" fontSize={12} />
                     <Tooltip
                       contentStyle={{
                         backgroundColor: "rgba(255,255,255,0.05)",
@@ -337,21 +337,22 @@ export default function DashboardPage() {
             <Card className="glass-card">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <Zap className="w-5 h-5" />
-                  <span>Processing Status</span>
+                  <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-sm sm:text-base">Processing Status</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
+                <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
                   <PieChart>
                     <Pie
                       data={statusData}
                       cx="50%"
                       cy="50%"
-                      innerRadius={60}
-                      outerRadius={120}
+                      innerRadius={40}
+                      outerRadius={80}
                       paddingAngle={5}
                       dataKey="value"
+                      className="sm:inner-radius-60 sm:outer-radius-120"
                     >
                       {statusData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
@@ -367,11 +368,11 @@ export default function DashboardPage() {
                     />
                   </PieChart>
                 </ResponsiveContainer>
-                <div className="flex justify-center space-x-4 mt-4">
+                <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-4">
                   {statusData.map((entry, index) => (
-                    <div key={index} className="flex items-center space-x-2">
-                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: entry.color }}></div>
-                      <span className="text-sm text-muted-foreground">{entry.name}</span>
+                    <div key={index} className="flex items-center space-x-1 sm:space-x-2">
+                      <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full" style={{ backgroundColor: entry.color }}></div>
+                      <span className="text-xs sm:text-sm text-muted-foreground">{entry.name}</span>
                     </div>
                   ))}
                 </div>
@@ -382,13 +383,13 @@ export default function DashboardPage() {
           {/* Recent Meetings */}
           <Card className="glass-card">
             <CardHeader>
-              <CardTitle className="flex items-center justify-between">
+              <CardTitle className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center space-x-2">
-                  <FileText className="w-5 h-5" />
-                  <span>Recent Meetings</span>
+                  <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-sm sm:text-base">Recent Meetings</span>
                 </div>
                 <Link href="/history">
-                  <Button variant="outline" size="sm" className="glass-button bg-transparent">
+                  <Button variant="outline" size="sm" className="glass-button bg-transparent w-full sm:w-auto">
                     View All
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -397,10 +398,10 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
               {meetings.length === 0 ? (
-                <div className="text-center py-12">
-                  <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                  <h3 className="text-lg font-semibold mb-2">No meetings yet</h3>
-                  <p className="text-muted-foreground mb-4">Upload your first meeting recording to get started</p>
+                <div className="text-center py-8 sm:py-12">
+                  <Upload className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 text-muted-foreground" />
+                  <h3 className="text-base sm:text-lg font-semibold mb-2">No meetings yet</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground mb-4">Upload your first meeting recording to get started</p>
                   <Link href="/upload">
                     <Button className="glass-button bg-primary/20 border-primary/30 hover:bg-primary/30 glow">
                       <Plus className="w-4 h-4 mr-2" />
@@ -409,40 +410,40 @@ export default function DashboardPage() {
                   </Link>
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {meetings.slice(0, 5).map((meeting) => (
                     <div
                       key={meeting.id}
-                      className="flex items-center justify-between p-4 glass rounded-lg smooth-transition hover:bg-white/10"
+                      className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 glass rounded-lg smooth-transition hover:bg-white/10 gap-3 sm:gap-0"
                     >
-                      <div className="flex items-center space-x-4">
+                      <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
                         {getStatusIcon(meeting.status)}
-                        <div>
-                          <h4 className="font-medium">{meeting.title}</h4>
-                          <p className="text-sm text-muted-foreground">
+                        <div className="min-w-0">
+                          <h4 className="font-medium text-sm sm:text-base truncate">{meeting.title}</h4>
+                          <p className="text-xs sm:text-sm text-muted-foreground truncate">
                             {new Date(meeting.upload_date).toLocaleDateString()} • {meeting.filename}
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center space-x-3">
+                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
                         {getStatusBadge(meeting.status)}
                         {meeting.has_notes && meeting.status === "completed" ? (
-                          <Link href={`/meeting-notes/${meeting.id}`}>
-                            <Button size="sm" className="glass-button bg-accent/20 border-accent/30 hover:bg-accent/30">
+                          <Link href={`/meeting-notes/${meeting.id}`} className="w-full sm:w-auto">
+                            <Button size="sm" className="glass-button bg-accent/20 border-accent/30 hover:bg-accent/30 w-full sm:w-auto">
                               View Notes
                             </Button>
                           </Link>
                         ) : meeting.status === "processing" ? (
-                          <Link href={`/processing/${meeting.id}`}>
+                          <Link href={`/processing/${meeting.id}`} className="w-full sm:w-auto">
                             <Button
                               size="sm"
-                              className="glass-button bg-primary/20 border-primary/30 hover:bg-primary/30"
+                              className="glass-button bg-primary/20 border-primary/30 hover:bg-primary/30 w-full sm:w-auto"
                             >
                               View Status
                             </Button>
                           </Link>
                         ) : (
-                          <Button size="sm" variant="outline" className="glass-button bg-transparent" disabled>
+                          <Button size="sm" variant="outline" className="glass-button bg-transparent w-full sm:w-auto" disabled>
                             Pending
                           </Button>
                         )}
@@ -455,18 +456,18 @@ export default function DashboardPage() {
           </Card>
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
             <Card className="glass-card smooth-transition scale-hover">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center mx-auto mb-4 glow">
-                  <Upload className="w-6 h-6 text-white" />
+              <CardContent className="p-4 sm:p-6 text-center">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center mx-auto mb-3 sm:mb-4 glow">
+                  <Upload className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Upload New Meeting</h3>
-                <p className="text-muted-foreground mb-4">
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Upload New Meeting</h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-4">
                   Upload audio or video files from your meetings for AI analysis
                 </p>
                 <Link href="/upload">
-                  <Button className="glass-button bg-primary/20 border-primary/30 hover:bg-primary/30">
+                  <Button className="glass-button bg-primary/20 border-primary/30 hover:bg-primary/30 w-full sm:w-auto">
                     Get Started
                   </Button>
                 </Link>
@@ -474,14 +475,14 @@ export default function DashboardPage() {
             </Card>
 
             <Card className="glass-card smooth-transition scale-hover">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-accent to-primary rounded-lg flex items-center justify-center mx-auto mb-4 glow-green">
-                  <FileText className="w-6 h-6 text-white" />
+              <CardContent className="p-4 sm:p-6 text-center">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-accent to-primary rounded-lg flex items-center justify-center mx-auto mb-3 sm:mb-4 glow-green">
+                  <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">View All Meetings</h3>
-                <p className="text-muted-foreground mb-4">Browse your complete meeting history and notes</p>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">View All Meetings</h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-4">Browse your complete meeting history and notes</p>
                 <Link href="/history">
-                  <Button className="glass-button bg-accent/20 border-accent/30 hover:bg-accent/30">
+                  <Button className="glass-button bg-accent/20 border-accent/30 hover:bg-accent/30 w-full sm:w-auto">
                     Browse History
                   </Button>
                 </Link>
@@ -489,14 +490,14 @@ export default function DashboardPage() {
             </Card>
 
             <Card className="glass-card smooth-transition scale-hover">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center mx-auto mb-4 glow">
-                  <Users className="w-6 h-6 text-white" />
+              <CardContent className="p-4 sm:p-6 text-center">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center mx-auto mb-3 sm:mb-4 glow">
+                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Learn More</h3>
-                <p className="text-muted-foreground mb-4">Discover advanced features and best practices</p>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Learn More</h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-4">Discover advanced features and best practices</p>
                 <Link href="/about">
-                  <Button variant="outline" className="glass-button bg-transparent">
+                  <Button variant="outline" className="glass-button bg-transparent w-full sm:w-auto">
                     Learn More
                   </Button>
                 </Link>
